@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.artelsv.ruu.RetrofitTools.RetrofitTools
 import com.artelsv.ruu.mvvm.SendDataViewModel
 import com.artelsv.ruu.mvvm.SendDataViewModelFactory
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_item.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -135,7 +137,7 @@ class ItemActivity : AppCompatActivity(){
                     dispatchTakePictureIntent()
                 }
 
-                override fun onButtonYesClick(isEditTextFilled: Boolean) {
+                override fun onButtonYesClick(isEditTextFilled: Boolean, view: View) {
                     if (isEditTextFilled) {
                         val _action =
                             RequestBody.create("text/plain".toMediaTypeOrNull(), "send_data")
@@ -147,6 +149,16 @@ class ItemActivity : AppCompatActivity(){
                             loadImage(path!!),
                             mapOf("name" to "test", "surname" to "test", "patronymic" to "test")
                         )
+                        val snackBar = Snackbar.make(
+                            responseText!!.rootView, "Данные отправлены на сервер",
+                            Snackbar.LENGTH_LONG
+                        ).setAction("Action", null)
+                        snackBar.setActionTextColor(Color.WHITE)
+                        val snackBarView = snackBar.view
+                        snackBarView.setBackgroundColor(Color.rgb(28, 28, 31))
+                        val textView = snackBarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
+                        textView.setTextColor(Color.WHITE)
+                        snackBar.show()
                     } else {
                         Toast.makeText(this@ItemActivity, "Заполните все поля", Toast.LENGTH_SHORT)
                     }

@@ -26,7 +26,7 @@ class PostDialog(listener: OnPostDialogClick) : DialogFragment() {
     interface OnPostDialogClick {
         fun onButtonNoClick()
         fun onButtonTakePhotoAgainClick()
-        fun onButtonYesClick(isEditTextFilled: Boolean)
+        fun onButtonYesClick(isEditTextFilled: Boolean, view: View)
         fun showImageFullSize()
     }
 
@@ -64,7 +64,7 @@ class PostDialog(listener: OnPostDialogClick) : DialogFragment() {
         buttonYes = rootView.findViewById(R.id.button_yes)
         buttonYes!!.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                listener.onButtonYesClick(isTextEditFilled())
+                listener.onButtonYesClick(isTextEditFilled(), v!!)
                 if (!isTextEditFilled()) {
                     focusTextEdit()
                 } else {
