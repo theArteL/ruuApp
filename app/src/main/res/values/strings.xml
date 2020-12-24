@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">RuU</string>
+    <string name="activity_item_target">target</string>
+    <string name="activity_item_response">response</string>
+    <string name="activity_item_button_takePhoto">Take a photo</string>
+
+    <string name="dialog_post_name">Имя</string>
+    <string name="dialog_post_fam">Фамилия</string>
+    <string name="dialog_post_otch">Отчество</string>
+    <string name="dialog_post_image">Фото</string>
+    <string name="dialog_post_button_yes">Да</string>
+    <string name="dialog_post_button_no">Нет</string>
+    <string name="dialog_post_button_takePhotoAgain">Переснять</string>
+
+    <string name="image_file_name">image.png</string>
+
+    <string name="dialog_full_size_close_button">Закрыть</string>
+</resources>
