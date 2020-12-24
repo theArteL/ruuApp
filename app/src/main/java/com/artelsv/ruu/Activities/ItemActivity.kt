@@ -84,11 +84,13 @@ class ItemActivity : AppCompatActivity(){
                 response: Response<ImagePostResponse>
             ) {
                 Log.e("test1", response.body()!!.status)
+                button_takePhoto.isEnabled = true
                 updateResponseText(response.body()!!.status)
                 hideProgress()
             }
             override fun onFailure(call: Call<ImagePostResponse>, t: Throwable) {
                 Log.e("test2", t.message)
+                button_takePhoto.isEnabled = true
                 hideProgress()
                 Toast.makeText(this@ItemActivity, t.message, Toast.LENGTH_LONG)
             }
@@ -176,6 +178,7 @@ class ItemActivity : AppCompatActivity(){
 
             })
             postDialog.show(supportFragmentManager, "postDialog")
+            button_takePhoto.isEnabled = false
 
         }
     }

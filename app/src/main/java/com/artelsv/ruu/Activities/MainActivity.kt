@@ -15,14 +15,15 @@ import com.artelsv.ruu.Model.GetModel
 import com.artelsv.ruu.Model.GetModelList
 import com.artelsv.ruu.R
 import com.artelsv.ruu.RecyclerViewRuu.RecyclerTouchListener
+import com.artelsv.ruu.RecyclerViewRuu.ruuAdapter
 import com.artelsv.ruu.RetrofitTools.RetrofitHelper
 import com.artelsv.ruu.RetrofitTools.RetrofitTools
 import com.artelsv.ruu.Utils.Status
 import com.artelsv.ruu.mvvm.GetModelViewModel
 import com.artelsv.ruu.mvvm.ViewModelFactory
-import com.artelsv.ruu.RecyclerViewRuu.ruuAdapter
 import dmax.dialog.SpotsDialog
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.InetAddress
 
 
 class MainActivity : AppCompatActivity() {
@@ -101,12 +102,14 @@ class MainActivity : AppCompatActivity() {
                         hideProgress()
                     }
                     Status.ERROR -> {
-                        recyclerList.visibility = View.VISIBLE
+                        recyclerList.visibility = View.GONE
                         Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                         Log.e("error", it.message + "| restart")
                         hideProgress()
 
-                        initObserver()
+                        if (isInternetAvailable()) {
+                            initObserver()
+                        }
                     }
                     Status.LOADING -> {
                         recyclerList.visibility = View.GONE
@@ -139,6 +142,15 @@ class MainActivity : AppCompatActivity() {
         adapter.apply {
             setGetModel(getModelList)
             notifyDataSetChanged()
+        }
+    }
+
+    fun isInternetAvailable(): Boolean {
+        return try {
+            val ipAddr: InetAddress = InetAddress.getByName("google.com")
+            !ipAddr.equals("")
+        } catch (e: Exception) {
+            false
         }
     }
 

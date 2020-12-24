@@ -95,7 +95,13 @@ class PostDialog(listener: OnPostDialogClick) : DialogFragment() {
     }
 
     private fun focusTextEdit(){
-        editName!!.requestFocus()
+        if (editName!!.text.isEmpty()) {
+            editName!!.requestFocus()
+        } else if (editName!!.text.isNotEmpty() && editFam!!.text.isEmpty()) {
+            editFam!!.requestFocus()
+        } else if (editName!!.text.isNotEmpty() && editFam!!.text.isNotEmpty() && editOtch!!.text.isEmpty()){
+            editOtch!!.requestFocus()
+        }
     }
 
     override fun onStart() {
