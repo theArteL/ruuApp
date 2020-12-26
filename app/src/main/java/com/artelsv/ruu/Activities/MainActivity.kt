@@ -107,9 +107,9 @@ class MainActivity : AppCompatActivity() {
                         Log.e("error", it.message + "| restart")
                         hideProgress()
 
-                        if (isInternetAvailable()) {
+//                        if (isInternetAvailable()) {
                             initObserver()
-                        }
+//                        }
                     }
                     Status.LOADING -> {
                         recyclerList.visibility = View.GONE
